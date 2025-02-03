@@ -1,27 +1,23 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Формын анхдагч үйлдлийг зогсооно
 
-const app = express();
-const PORT = 3000;
+    const username = document.getElementById('username').value; // Нэвтрэх нэр
+    const password = document.getElementById('password').value; // Нууц үг
 
-// Middleware
-app.use(express.json());
-app.use(express.static('public')); // HTML, JS файлууд байрлах хавтас
-
-app.post('/save', (req, res) => {
-    const { username, password } = req.body;
-    const data = `Нэвтрэх нэр: ${username}\nНууц үг: ${password}\n`;
-
-    fs.appendFile(path.join(__dirname, 'text.txt'), data, (err) => {
-        if (err) {
-            console.error('Файлд бичих алдаа:', err);
-            return res.status(500).json({ message: 'Файлд бичих алдаа' });
-        }
-        res.json({ message: 'Мэдээлэл амжилттай хадгалагдлаа.' });
+    // Сервер руу илгээх
+    fetch('/save', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Амжилттай хадгаллаа:', data);
+        // Хэрэглэгчдэд амжилттай хадгалсан тухай мэдэгдэл үзүүлэх боломжтой
+    })
+    .catch((error) => {
+        console.error('Алдаа:', error);
     });
-});
-
-app.listen(PORT, () => {
-    console.log(`Сервер http://localhost:${PORT} дээр ажиллаж байна`);
 });
